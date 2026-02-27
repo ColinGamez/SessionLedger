@@ -1,5 +1,5 @@
 -- ============================================================
--- SessionLedger — Row Level Security Policies
+-- LedgerStack — Row Level Security Policies
 -- ============================================================
 
 -- ---- Enable RLS ----

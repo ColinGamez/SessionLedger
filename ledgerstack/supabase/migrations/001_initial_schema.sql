@@ -1,5 +1,5 @@
 -- ============================================================
--- SessionLedger — Supabase Initial Schema
+-- LedgerStack — Supabase Initial Schema
 -- ============================================================
 
 -- ---- Extensions ----

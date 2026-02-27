@@ -1,4 +1,4 @@
-# SessionLedger — Performance & Scaling (10k+ Users)
+# LedgerStack — Performance & Scaling (10k+ Users)
 
 ## Database (Supabase / Postgres)
 

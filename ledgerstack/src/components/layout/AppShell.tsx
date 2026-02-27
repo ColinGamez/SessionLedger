@@ -32,7 +32,7 @@ export function AppShell({ children, profile }: AppShellProps) {
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-zinc-800">
           <span className="text-lg font-semibold tracking-tight">
-            Session<span className="text-emerald-400">Ledger</span>
+            Ledger<span className="text-emerald-400">Stack</span>
           </span>
         </div>
 

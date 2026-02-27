@@ -1,4 +1,4 @@
-# SessionLedger — Vercel Deploy Checklist
+# LedgerStack — Vercel Deploy Checklist
 
 ## 1. Supabase Setup
 
@@ -15,7 +15,7 @@
 ## 2. Stripe Setup
 
 - [ ] Create Stripe account (or use existing)
-- [ ] Create Product: "SessionLedger Pro" with monthly recurring price
+- [ ] Create Product: "LedgerStack Pro" with monthly recurring price
 - [ ] Copy Price ID → `STRIPE_PRO_MONTHLY_PRICE_ID`
 - [ ] Copy Secret Key → `STRIPE_SECRET_KEY` (use `sk_live_` in production)
 - [ ] Configure Stripe Billing Portal (Dashboard > Settings > Billing Portal)

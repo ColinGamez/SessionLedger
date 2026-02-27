@@ -50,7 +50,7 @@ export async function GET() {
     status: 200,
     headers: {
       'Content-Type': 'text/csv; charset=utf-8',
-      'Content-Disposition': `attachment; filename="sessionledger-export-${Date.now()}.csv"`,
+      'Content-Disposition': `attachment; filename="ledgerstack-export-${Date.now()}.csv"`,
     },
   })
 }

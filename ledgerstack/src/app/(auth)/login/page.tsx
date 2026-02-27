@@ -2,36 +2,27 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { getSupabaseBrowserClient } from '@/lib/supabase/browser'
+import type { Metadata } from 'next'
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') ?? '/dashboard'
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [done, setDone] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters')
-      setLoading(false)
-      return
-    }
-
     const supabase = getSupabaseBrowserClient()
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
       setError(error.message)
@@ -39,24 +30,8 @@ export default function RegisterPage() {
       return
     }
 
-    setDone(true)
-  }
-
-  if (done) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="w-full max-w-sm text-center space-y-4">
-          <h1 className="text-2xl font-semibold">Check your email</h1>
-          <p className="text-zinc-400 text-sm">
-            We sent a confirmation link to <strong className="text-zinc-200">{email}</strong>.
-            Click it to activate your account.
-          </p>
-          <Link href="/login" className="block text-emerald-400 hover:text-emerald-300 text-sm">
-            Back to login
-          </Link>
-        </div>
-      </div>
-    )
+    router.push(redirectTo)
+    router.refresh()
   }
 
   return (
@@ -64,9 +39,9 @@ export default function RegisterPage() {
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
           <h1 className="text-2xl font-semibold">
-            Session<span className="text-emerald-400">Ledger</span>
+            Ledger<span className="text-emerald-400">Stack</span>
           </h1>
-          <p className="mt-2 text-zinc-400 text-sm">Create your account</p>
+          <p className="mt-2 text-zinc-400 text-sm">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -95,8 +70,7 @@ export default function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              autoComplete="new-password"
-              minLength={8}
+              autoComplete="current-password"
               className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-colors"
             />
           </div>
@@ -106,14 +80,14 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full py-2.5 rounded-md bg-emerald-500 hover:bg-emerald-400 text-black text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
         <p className="text-center text-sm text-zinc-500">
-          Already have an account?{' '}
-          <Link href="/login" className="text-emerald-400 hover:text-emerald-300">
-            Sign in
+          Don&apos;t have an account?{' '}
+          <Link href="/register" className="text-emerald-400 hover:text-emerald-300">
+            Sign up
           </Link>
         </p>
       </div>

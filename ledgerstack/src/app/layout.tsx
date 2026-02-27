@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: {
-    default: 'SessionLedger',
-    template: '%s | SessionLedger',
+    default: 'LedgerStack',
+    template: '%s | LedgerStack',
   },
   description: 'Track your session performance with precision.',
 }
